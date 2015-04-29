@@ -11,7 +11,7 @@ If so, please remove the ".h" involved in the two include commands and add
 
 STEP 3. run main.exe
 
-STEP 4. get the *.txt data 
+STEP 4. get the *.txt data (All the run times are in milliseconds)
 
 NOTE THAT THE CODE HAS ONLY BEEN TESTED ON WINDOWS 64 BITS.
 
