@@ -135,9 +135,9 @@ void oneHilbertSimulation(int *d,  int *R, int *ns, double *ave, double *var){
 	double* vdc = new double[N];
 	Scrambled * vdc_os = Scrambled_Create(&sq,&d0, &N) ;
 	
-	int order2  = (int) floor((double) (*ns)/(*d));
-	HilbertGenerator os(order,order2,*d);	//the fast version
-	//HilbertGenerator os(order,*d);
+	//int order2  = (int) floor((double) (*ns)/(*d));
+	//HilbertGenerator os(order,order2,*d);	//the fast version
+	HilbertGenerator os(order,*d);
 	
 	double fx;
 	double * cp = new double [*d];	
@@ -146,8 +146,8 @@ void oneHilbertSimulation(int *d,  int *R, int *ns, double *ave, double *var){
 		Scrambled_GetPoints(vdc_os, &d0, &N, vdc, &flag);
 		tot = 0.0;
 		for(int i = 0; i< N; ++i){					
-			os.fastConvert(cp, vdc[i]);		
-			//os.convert(cp, vdc[i]);					
+			//os.fastConvert(cp, vdc[i]);		
+			os.convert(cp, vdc[i]);					
 			/*========evaluate the integrand=======*/
 			myFn(cp, d, &fx);
 			tot += fx;			
@@ -230,9 +230,9 @@ int main(){
 		cout << "Hilbert sampling starts..." << endl;		
 		start_time = clock();
 		int order = (int) ceil((double) n/d);
-		int order2 = (int) floor((double) n/d);
-		HilbertGenerator os(order,order2,d);//the fast version
-		//HilbertGenerator os(order,d);
+		//int order2 = (int) floor((double) n/d);
+		//HilbertGenerator os(order,order2,d);//the fast version
+		HilbertGenerator os(order,d);
 		int d0 = 1;
 		Scrambled * vdc_os = Scrambled_Create(&sq,&d0, &N) ;
 		for(int r = 0; r < R; ++r)
@@ -241,8 +241,8 @@ int main(){
 			Scrambled_GetPoints(vdc_os, &d0, &N, vdc, &flag);			
 			for(int i = 0;i < N; ++i)
 			{			
-				os.fastConvert(cp,vdc[i]);
-				//os.convert(cp,vdc[i]);
+				//os.fastConvert(cp,vdc[i]);
+				os.convert(cp,vdc[i]);
 			}
 		}
 		end_time = clock();
